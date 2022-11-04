@@ -14,14 +14,11 @@ import statsmodels.api as sms
 data = pd.read_csv('sacramento.csv', usecols = ['baths', 'beds', 'sqft', 'price'])
 
 independent = data[['beds', 'sqft', 'price']]
-dependent = data[['baths']]
+dependent = np.select([data['baths'] == 1, (data['baths'] >= 1)], [0,1])
 
 independent = sms.add_constant(independent)
 
-dependent = np.where(dependent <= 1, 0, 1)
-
-sm_model = sms.OLS(dependent,independent)
-model = sm_model.fit()
+model = sms.Logit(dependent, independent).fit()
 
 print(model.params.round(2))
 print(model.pvalues.round(2))

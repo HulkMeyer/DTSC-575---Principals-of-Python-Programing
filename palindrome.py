@@ -5,23 +5,19 @@
 
 import sys
 
+string = str(sys.argv[1])
+
 def palindrome(string):
-    reverse = ""
-    for i in string:
-        reverse = i + reverse
-        string == reverse
-    if True:
+    
+    string_lower = string.lower().split()
+    pal_test = lambda phrase: phrase == phrase[::-1]
+    verdict = pal_test(string_lower)
+
+    if verdict == True:
+        print("It's a palindrome!")
+    elif string_lower[0][0] == string_lower[-1][-1]:
         print("It's a palindrome!")
     else:
         print("It's not a palindrome!")
-
-string = str(sys.argv[1])
-
-punc = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
-res=" "
-for ele in string:
-    if ele not in punc:
-        res += ele
-string = res.lower()
 
 palindrome(string)
